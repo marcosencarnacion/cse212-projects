@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+
 public static class Arrays
 {
     /// <summary>
@@ -13,7 +16,17 @@ public static class Arrays
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
 
-        return []; // replace this return statement with your own
+        // Step 1: Create and return an array of multiples of a number. 
+        double[] result = new double[length];
+
+        //Step 2: fill the array with the multiples.
+        for (int i = 0; i < length; i++)
+        {
+            result[i] = number * (i + 1);
+        }
+
+        // Step 3: Return the resulting array.
+        return result;
     }
 
     /// <summary>
