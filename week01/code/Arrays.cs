@@ -42,5 +42,20 @@ public static class Arrays
         // Remember: Using comments in your program, write down your process for solving this problem
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
+
+        // Step 1: Normalize the amount.
+        amount %= data.Count;
+
+        // Step 2: If there's nothing to rotate, exit.
+        if (amount == 0) return;
+
+        // Step 3: Get the "tail" of size 'amount'.
+        List<int> tail = data.GetRange(data.Count - amount, amount);
+
+        // Step 4: Remove the elements from the end.
+        data.RemoveRange(data.Count - amount, amount);
+
+        // Step 5: Insert the tail at the begining. 
+        data.InsertRange(0, tail);
     }
 }
