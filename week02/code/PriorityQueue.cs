@@ -1,6 +1,6 @@
 ﻿public class PriorityQueue
 {
-    private List<PriorityItem> _queue = new();
+    private readonly List<PriorityItem> _queue = new();
 
     /// <summary>
     /// Add a new value to the queue with an associated priority.  The
@@ -17,21 +17,23 @@
 
     public string Dequeue()
     {
-        if (_queue.Count == 0) // Verify the queue is not empty
-        {
+        if (_queue.Count == 0)             // Verify the queue is not empty
             throw new InvalidOperationException("The queue is empty.");
-        }
 
-        // Find the index of the item with the highest priority to remove
-        var highPriorityIndex = 0;
-        for (int index = 1; index < _queue.Count - 1; index++)
+        // Find the *first* item that has the highest priority
+        int highPriorityIndex = 0;
+        for (int index = 1; index < _queue.Count; index++)     // iterate through entire list
         {
-            if (_queue[index].Priority >= _queue[highPriorityIndex].Priority)
+            if (_queue[index].Priority > _queue[highPriorityIndex].Priority)   // strict >
+            {
                 highPriorityIndex = index;
+            }
+            // If priorities are equal, keep the earlier (FIFO) item already in highPriorityIndex
         }
 
-        // Remove and return the item with the highest priority
-        var value = _queue[highPriorityIndex].Value;
+        // Remove and return that item
+        string value = _queue[highPriorityIndex].Value;
+        _queue.RemoveAt(highPriorityIndex);
         return value;
     }
 
@@ -52,8 +54,5 @@ internal class PriorityItem
         Priority = priority;
     }
 
-    public override string ToString()
-    {
-        return $"{Value} (Pri:{Priority})";
-    }
+    public override string ToString() => $"{Value} (Pri:{Priority})";
 }
