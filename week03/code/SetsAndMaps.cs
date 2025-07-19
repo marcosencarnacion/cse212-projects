@@ -101,8 +101,47 @@ public static class SetsAndMaps
     /// </summary>
     public static bool IsAnagram(string word1, string word2)
     {
-        // TODO Problem 3 - ADD YOUR CODE HERE
-        return false;
+        // Normalize inputs: lowercase and remove spaces
+        string clean1 = word1.Replace(" ", "").ToLower();
+        string clean2 = word2.Replace(" ", "").ToLower();
+
+        if (clean1.Length != clean2.Length)
+        {
+            return false;
+        }
+
+        // Count letters in word1
+        Dictionary<char, int> letterCount = new Dictionary<char, int>();
+        foreach (char c in clean1)
+        {
+            if (letterCount.ContainsKey(c))
+            {
+                letterCount[c]++;
+            }
+            else
+            {
+                letterCount[c] = 1;
+            }
+        }
+
+        // Subtract counts using word2
+        foreach (char c in clean2)
+        {
+            if (!letterCount.ContainsKey(c))
+            {
+                return false;
+            }
+
+            letterCount[c]--;
+            if (letterCount[c] < 0)
+            {
+                return false;
+            }
+        }
+
+        // All counts must be 0
+        return letterCount.Values.All(count => count == 0);
+
     }
 
     /// <summary>
