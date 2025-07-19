@@ -1,3 +1,6 @@
+
+// 1. Add code in FeatureCollection.cs to describe the JSON using classes and properties 
+// on those classes so that the call to Deserialize above works properly.
 public class FeatureCollection
 {
     public List<Feature> Features { get; set; }
