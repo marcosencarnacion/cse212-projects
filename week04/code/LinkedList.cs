@@ -200,8 +200,13 @@ public class LinkedList : IEnumerable<int>
     /// </summary>
     public IEnumerable Reverse()
     {
-        // TODO Problem 5
-        yield return 0; // replace this line with the correct yield return statement(s)
+        var curr = _tail; // Start from the tail
+        while (curr is not null)
+        {
+            yield return curr.Data;
+            curr = curr.Prev; // Move backwards
+        }
+
     }
 
     public override string ToString()
